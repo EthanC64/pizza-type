@@ -2,26 +2,27 @@ console.log("********************************");
 
 document.querySelector(".submit").addEventListener("click", function () {
   // save inputs
-  var name = document.querySelector("#name").value.trim();
-  var description = document.querySelector("#description").value;
+  var time = document.querySelector("#time").value.trim();
+  var topping = document.querySelector("#topping").value;
   // send data to my own api
-  fetch(`/todo/${name}/${description}`)
+  fetch(`/pizza/${time}/${topping}`)
     .then(function (res) {
       return res.json();
     })
     .then(function (data) {
       console.log(data);
 
+
       let template = "";
       for (let i = 0; i < data.length; i++) {
         template += `
             <div class="">
-                <span>name: ${data[i].name}</span>
-                <span>description: ${data[i].description}</span>
+                <span>time: ${data[i].time}</span>
+                <span>topping: ${data[i].topping}</span>
             </div>
         `;
       }
 
-      document.querySelector("#todo").innerHTML = template;
+      document.querySelector("#pizza").innerHTML = template;
     });
 });
